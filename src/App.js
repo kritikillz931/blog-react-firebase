@@ -5,6 +5,7 @@ import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { signOut } from "firebase/auth"
 import { auth } from "./firebase-config";
+import "./App.css"
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"))

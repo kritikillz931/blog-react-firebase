@@ -18,7 +18,7 @@ export const Login = ({ setIsAuth }) => {
   return (
     <div className='loginPage'>
       <p>Sign In With Google To Continue</p>
-      <button className='loginWithGoogleButton' onClick={signInWithGoogle}>
+      <button className='login-with-google-btn' onClick={signInWithGoogle}>
         Sign In With Google
       </button>
     </div>
