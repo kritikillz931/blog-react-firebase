@@ -1,15 +1,15 @@
 import { useState } from "react";
-import {BrowserRouter as Router, Routes, Route, Link, useNavigate} from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from "react-router-dom"
 import { CreatePost } from "./pages/CreatePost";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
-import {signOut} from "firebase/auth"
+import { signOut } from "firebase/auth"
 import { auth } from "./firebase-config";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false)
 
- 
+
 
   const signUserOut = () => {
     signOut(auth)
@@ -21,13 +21,20 @@ function App() {
     <Router>
       <nav>
         <Link to="/">Home</Link>
-        <Link to="/createpost">Create Post</Link>
-        {!isAuth ? <Link to="/login">Login</Link> : <button>Log Out</button>}
+
+        {!isAuth ? (
+          <Link to="/login">Login</Link>
+        ) : (
+          <>
+            <Link to="/createpost">Create Post</Link>
+            <button onClick={signUserOut}>Log Out</button>
+          </>
+        )}
       </nav>
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/createpost" element={<CreatePost/>} />
-        <Route path="/Login" element={<Login setIsAuth={setIsAuth}/>} />
+        <Route path="/" element={<Home isAuth={isAuth}/>} />
+        <Route path="/createpost" element={<CreatePost isAuth={isAuth} />} />
+        <Route path="/Login" element={<Login setIsAuth={setIsAuth} />} />
       </Routes>
     </Router>
   );
